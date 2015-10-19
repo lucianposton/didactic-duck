@@ -11,5 +11,7 @@ DESCRIPTION="GStreamer plugin for the PulseAudio sound server"
 KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 ~sh sparc x86"
 IUSE=""
 
-RDEPEND=">=media-sound/pulseaudio-2.1-r1[${MULTILIB_USEDEP}]"
+RDEPEND=">=media-sound/pulseaudio-2.1-r1[${MULTILIB_USEDEP}]
+	>=media-libs/gst-plugins-base-0.10.36:${SLOT}[${MULTILIB_USEDEP}]
+"
 DEPEND="${RDEPEND}"
