@@ -35,7 +35,9 @@ RDEPEND="
 	gnome? ( >=gnome-base/gnome-shell-3.6.2 )
 	gstreamer? (
 		media-libs/gstreamer:1.0
-		media-libs/gst-plugins-base:1.0 )
+		media-libs/gst-plugins-base:1.0
+		pulseaudio? ( media-plugins/gst-plugins-pulse:1.0 )
+	)
 	mate? ( mate-base/mate-applets )
 	pulseaudio? ( >=media-sound/pulseaudio-0.9.15 )
 	xfce? (
@@ -70,6 +72,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}/${P}-0001-Always-link-against-gstreamer-1.0.patch"
 	eautoreconf
 	gnome2_src_prepare
 }
