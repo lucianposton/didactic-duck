@@ -1,0 +1,2 @@
+# didactic-duck
+Some ebuilds
