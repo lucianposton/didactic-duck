@@ -6,7 +6,7 @@ EAPI=5
 
 inherit eutils autotools git-r3
 
-DISCRIPTION="Prints user's X server idle time in milliseconds"
+DESCRIPTION="Prints user's X server idle time in milliseconds"
 HOMEPAGE="https://github.com/lucianposton/xprintidle"
 EGIT_REPO_URI="https://github.com/lucianposton/xprintidle.git"
 
