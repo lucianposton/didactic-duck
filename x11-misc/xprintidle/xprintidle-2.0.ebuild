@@ -17,13 +17,10 @@ KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND="
-	x11-base/xorg-server
-	x11-libs/libXdmcp
-	x11-libs/libxcb
 	x11-libs/libXext
 	x11-libs/libX11
 	x11-libs/libXScrnSaver
-	x11-libs/libXau"
+	"
 RDEPEND="${DEPEND}"
 
 #pre_src_configure() {
