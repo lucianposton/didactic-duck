@@ -50,6 +50,7 @@ src_configure() {
 	local myeconfargs=(
 		$(use_with doc doxygen)
 		--enable-ld-version-script
+		--disable-qt3-immodule
 		$gtk_version
 	)
 	autotools-utils_src_configure
