@@ -145,7 +145,7 @@ src_unpack() {
 	epatch "${FILESDIR}"/qt-3.3.8b-freetype251.patch
 
 	if use immqt || use immqt-bc ; then
-		epatch ../${IMMQT_P}.diff
+		epatch --follow-symlinks ../${IMMQT_P}.diff
 		sh make-symlinks.sh || die "make symlinks failed"
 
 		epatch "${FILESDIR}"/qt-3.3.8-immqt+gcc-4.3.patch
