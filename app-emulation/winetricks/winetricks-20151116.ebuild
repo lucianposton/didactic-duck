@@ -54,6 +54,10 @@ src_unpack() {
 	fi
 }
 
+src_prepare() {
+	epatch_user
+}
+
 src_install() {
 	default
 	if use gtk || use kde; then
