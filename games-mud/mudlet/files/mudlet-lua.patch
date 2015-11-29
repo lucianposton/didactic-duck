@@ -1,24 +1,26 @@
-diff -rup src.orig/mudlet-lua/lua/LuaGlobal.lua src/mudlet-lua/lua/LuaGlobal.lua
---- src.orig/mudlet-lua/lua/LuaGlobal.lua	2013-05-14 14:42:53.000000000 +0200
-+++ src/mudlet-lua/lua/LuaGlobal.lua	2013-05-14 15:01:21.000000000 +0200
-@@ -108,7 +108,7 @@ local packages = {
- 	}
-
- for _, package in ipairs(packages) do
--	local result, msg = pcall(dofile, "./mudlet-lua/lua/" .. package)
-+	local result, msg = pcall(dofile, "/usr/share/mudlet/lua/" .. package)
- 	if not result then echo("Error attempting to load file: " .. package .. ": "..msg.."\n") end
- end
-
-diff -rup src.orig/TLuaInterpreter.cpp src/TLuaInterpreter.cpp
---- src.orig/TLuaInterpreter.cpp	2013-05-14 14:42:52.000000000 +0200
-+++ src/TLuaInterpreter.cpp	2013-05-14 14:45:52.000000000 +0200
-@@ -10295,7 +10295,7 @@ void TLuaInterpreter::loadGlobal()
- {
-     //QString path = QDir::homePath()+"/.config/mudlet/mudlet-lua/lua/LuaGlobal.lua";
-
--    QString path = "mudlet-lua/lua/LuaGlobal.lua";
+diff --git a/src/mudlet-lua/lua/LuaGlobal.lua b/src/mudlet-lua/lua/LuaGlobal.lua
+index 367adca..9643e9f 100644
+--- a/src/mudlet-lua/lua/LuaGlobal.lua
++++ b/src/mudlet-lua/lua/LuaGlobal.lua
+@@ -130,6 +130,8 @@ local packages = {
+ local prefixes = {"../src/mudlet-lua/lua/", "../Resources/mudlet-lua/lua/",
+     "mudlet.app/Contents/Resources/mudlet-lua/lua/", "mudlet-lua/lua"}
+ 
++table.insert(prefixes, "/usr/share/mudlet/lua/")
++
+ local prefix
+ for i = 1, #prefixes do
+     if lfs.attributes(prefixes[i]) then
+diff --git a/src/TLuaInterpreter.cpp b/src/TLuaInterpreter.cpp
+index 261ae4c..8d7c5b6 100644
+--- a/src/TLuaInterpreter.cpp
++++ b/src/TLuaInterpreter.cpp
+@@ -11755,7 +11755,7 @@ void TLuaInterpreter::loadGlobal()
+ #if defined(Q_OS_MAC)
+     QString path = QCoreApplication::applicationDirPath() + "/../Resources/mudlet-lua/lua/LuaGlobal.lua";
+ #else
+-    QString path = "../src/mudlet-lua/lua/LuaGlobal.lua";
 +    QString path = "/usr/share/mudlet/lua/LuaGlobal.lua";
-     int error = luaL_dofile( pGlobalLua, path.toLatin1().data() );
-     if( error != 0 )
-     {
+     // Additional "../src/" allows location of lua code when object code is in a
+     // directory alongside src directory as occurs using Qt Creator "Shadow Builds"
+ #endif
