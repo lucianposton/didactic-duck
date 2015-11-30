@@ -4,6 +4,8 @@ Just some ebuilds that may or may not work.
 
 # How to add this overlay with layman
 
+[![Join the chat at https://gitter.im/lucianposton/didactic-duck](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/lucianposton/didactic-duck?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Use layman to add and manage this overlay. Following the instructions from the [Gentoo Wiki](http://wiki.gentoo.org/wiki/Layman#Adding_custom_overlays):
 
 	layman -o https://raw.github.com/lucianposton/didactic-duck/master/repositories.xml -f -a didactic-duck
