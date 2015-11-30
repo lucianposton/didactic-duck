@@ -1,5 +1,7 @@
 Just some ebuilds that may or may not work.
 
+[![Join the chat at https://gitter.im/lucianposton/didactic-duck](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/lucianposton/didactic-duck?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 # How to add this overlay with layman
 
 Use layman to add and manage this overlay. Following the instructions from the [Gentoo Wiki](http://wiki.gentoo.org/wiki/Layman#Adding_custom_overlays):
