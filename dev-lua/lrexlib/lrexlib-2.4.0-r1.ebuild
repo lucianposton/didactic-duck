@@ -13,11 +13,15 @@ SLOT="0"
 KEYWORDS="amd64 ~x86"
 IUSE="doc oniguruma pcre"
 
-RDEPEND=">=dev-lang/lua-5.1
+DEPEND="
+	>=dev-lang/lua-5.1
 	oniguruma? ( dev-libs/oniguruma )
-	pcre? ( dev-libs/pcre )"
-RDEPEND="${DEPEND}
-	app-arch/unzip"
+	pcre? ( dev-libs/pcre )
+"
+RDEPEND="
+	${DEPEND}
+	app-arch/unzip
+"
 
 
 inherit multilib
