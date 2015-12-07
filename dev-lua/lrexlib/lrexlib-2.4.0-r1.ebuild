@@ -64,6 +64,18 @@ src_unpack() {
 		src/defaults.mak || die "sed failed"
 
 	sed -i \
+		-e "s:^#\(LIB = -lc\):\1:" \
+		src/posix/rex_posix.mak || die "sed failed"
+
+	sed -i \
+		-e "s:\(LIB = -lpcre\):\1 -lc:" \
+		src/pcre/rex_pcre.mak || die "sed failed"
+
+	sed -i \
+		-e "s:\(LIB = -lonig\):\1 -lc:" \
+		src/oniguruma/rex_onig.mak || die "sed failed"
+
+	sed -i \
 		-e "s/\(all:.*\)test/\1/" \
 		Makefile || die "sed failed"
 
@@ -80,6 +92,10 @@ src_unpack() {
 			-e "s/test_onig//g" \
 			Makefile || die "sed failed"
 	fi
+}
+
+src_compile() {
+	emake -j1
 }
 
 src_install() {
