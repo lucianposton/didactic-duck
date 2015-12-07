@@ -16,7 +16,7 @@ IUSE="doc oniguruma pcre"
 DEPEND="
 	>=dev-lang/lua-5.1
 	oniguruma? ( dev-libs/oniguruma )
-	pcre? ( dev-libs/pcre )
+	pcre? ( dev-libs/libpcre )
 "
 RDEPEND="
 	${DEPEND}
