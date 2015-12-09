@@ -11,8 +11,7 @@ inherit git-r3 distutils-r1
 DESCRIPTION="tatt is an arch testing tool"
 HOMEPAGE="https://github.com/lucianposton/tatt"
 EGIT_REPO_URI="https://github.com/lucianposton/tatt.git"
-#EGIT_COMMIT="${PV}"
-EGIT_BRANCH="comment-unmasks"
+EGIT_COMMIT="v${PV}"
 
 LICENSE="GPL-2"
 SLOT="0"
