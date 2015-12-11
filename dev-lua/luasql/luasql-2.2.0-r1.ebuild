@@ -23,6 +23,7 @@ DEPEND="
 	mysql? ( virtual/mysql )
 	postgres? ( dev-db/postgresql )
 "
+RDEPEND="${DEPEND}"
 
 
 inherit multilib
