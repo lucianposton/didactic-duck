@@ -22,6 +22,7 @@ SLOT="0"
 IUSE=""
 
 DEPEND="
+	>=dev-lang/lua-5.1
 	dev-libs/zziplib
 "
 RDEPEND="${DEPEND}"
