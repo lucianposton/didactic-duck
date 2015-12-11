@@ -20,7 +20,8 @@ DEPEND="
 	sqlite? ( dev-db/sqlite:0 )
 	sqlite3? ( dev-db/sqlite:3 )
 	mysql? ( virtual/mysql )
-	postgres? ( virtual/postgresql-base )"
+	postgres? ( dev-db/postgresql )
+"
 
 
 inherit multilib
