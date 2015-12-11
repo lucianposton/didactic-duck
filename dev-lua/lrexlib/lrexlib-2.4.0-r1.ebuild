@@ -20,6 +20,8 @@ DEPEND="
 "
 RDEPEND="
 	${DEPEND}
+"
+DEPEND+="
 	app-arch/unzip
 "
 
