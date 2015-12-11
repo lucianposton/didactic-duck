@@ -10,7 +10,7 @@ DESCRIPTION="Unicode fonts for Musical Notation"
 HOMEPAGE="http://users.teilar.gr/~g1951d/"
 SRC_URI="http://users.teilar.gr/~g1951d/${PN^}.zip -> ${P}.zip"
 
-LICENSE="public-domain"
+LICENSE="Unicode_Fonts_for_Ancient_Scripts"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~ppc ~x86"
 IUSE="doc"
