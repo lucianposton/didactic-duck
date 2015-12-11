@@ -17,6 +17,7 @@ MODULES="sqlite sqlite3 mysql postgres"
 IUSE="doc ${MODULES}"
 
 DEPEND="
+	>=dev-lang/lua-5.1
 	sqlite? ( dev-db/sqlite:0 )
 	sqlite3? ( dev-db/sqlite:3 )
 	mysql? ( virtual/mysql )
