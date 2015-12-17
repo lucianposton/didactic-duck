@@ -19,4 +19,7 @@ SLOT="0"
 LICENSE="|| ( Artistic GPL-2 )"
 KEYWORDS="alpha amd64 arm hppa ia64 m68k mips ppc ppc64 s390 sh sparc sparc-fbsd x86 x86-fbsd"
 
-DEPEND="dev-lang/perl"
+DEPEND="
+	dev-lang/perl
+	dev-perl/Module-Build
+"
