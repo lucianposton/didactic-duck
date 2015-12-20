@@ -50,6 +50,13 @@ RDEPEND="${DEPEND}"
 # dev-perl/Unicode-String is required by spells_en2spellsh.pl to regenerate
 # staticspells.h when spells_us.txt is updated
 
+# Build time dependencies
+DEPEND+="
+	sys-devel/automake
+	sys-devel/autoconf
+	sys-devel/autoconf-archive
+"
+
 FILECAPS=(
 	cap_net_raw+eip usr/bin/showeq${PROGRAM_SUFFIX}
 )
