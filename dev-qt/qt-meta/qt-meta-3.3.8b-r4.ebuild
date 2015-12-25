@@ -38,7 +38,7 @@ RDEPEND="
 	mysql? ( virtual/mysql )
 	nas? ( >=media-libs/nas-1.5 )
 	opengl? ( virtual/opengl virtual/glu )
-	postgres? ( dev-db/postgresql-base )
+	postgres? ( dev-db/postgresql )
 	xinerama? ( x11-libs/libXinerama )"
 DEPEND="${RDEPEND}
 	x11-proto/inputproto
@@ -46,7 +46,7 @@ DEPEND="${RDEPEND}
 	xinerama? ( x11-proto/xineramaproto )
 	immqt? ( x11-proto/xineramaproto )
 	immqt-bc? ( x11-proto/xineramaproto )"
-PDEPEND="odbc? ( ~dev-db/qt-unixODBC-$PV )"
+PDEPEND="odbc? ( dev-db/unixODBC )"
 
 S="${WORKDIR}/qt-x11-${SRCTYPE}-${PV}"
 
