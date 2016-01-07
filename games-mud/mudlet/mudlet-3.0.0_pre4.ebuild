@@ -1,57 +1,65 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=5
 
-inherit eutils qmake-utils git-r3
+MY_PN=${PN^}
 
-DESCRIPTION="A modern open source MUD client with a graphical user inteface and full built in Lua scripting support for all major platforms."
-HOMEPAGE="http://www.mudlet.org"
-EGIT_REPO_URI="https://github.com/Mudlet/Mudlet.git"
+MY_PV=${PV}
+MY_PV=${MY_PV/_alpha/-alpha}
+MY_PV=${MY_PV/_beta/-beta}
+MY_PV=${MY_PV/_pre3/-gamma}
+MY_PV=${MY_PV/_pre4/-delta}
+MY_PV=${MY_PV/_pre5/-epsilon}
+MY_PV=${MY_PV/_pre6/-zeta}
 
+MY_P="${MY_PN}-${MY_PN}-${MY_PV}"
+
+SCM=""
+KEYWORDS=""
 if [[ ${PV} == 9999* ]]; then
-	KEYWORDS=""
+	SCM="git-r3"
+	EGIT_REPO_URI="https://github.com/${MY_PN}/${MY_PN}.git"
 else
-	KEYWORDS="amd64 ~x86"
-	MY_P=${P^}
-	MY_P=${MY_P/_alpha/-alpha}
-	MY_P=${MY_P/_beta/-beta}
-	MY_P=${MY_P/_pre3/-gamma}
-	MY_P=${MY_P/_pre4/-delta}
-	MY_P=${MY_P/_pre5/-epsilon}
-	MY_P=${MY_P/_pre6/-zeta}
-	EGIT_COMMIT="${MY_P}"
+	KEYWORDS="~amd64 ~x86"
+	SRC_URI="https://github.com/${MY_PN}/${MY_PN}/archive/${MY_PN}-${MY_PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/${MY_P}"
 fi
 
-LICENSE="GPL-2"
+inherit eutils qmake-utils ${SCM}
+
+DESCRIPTION="Modern GUI MUD client with Lua scripting support"
+HOMEPAGE="http://www.mudlet.org"
+
+LICENSE="GPL-2+"
 SLOT="0"
 IUSE=""
 
 DEPEND="
-	dev-lang/lua
-	dev-qt/qtcore:5
-	dev-qt/qtopengl:5
-	dev-qt/qtgui:5
-	dev-qt/qtnetwork:5
-	dev-qt/qtmultimedia:5
-	dev-qt/qtwidgets:5
-	dev-qt/designer:5
-	media-libs/glu
+	>=dev-libs/boost-1.55
+	>=dev-libs/libpcre-7.8
+
 	app-text/hunspell
-	sys-libs/zlib
+	dev-lang/lua
 	dev-libs/libzip
 	dev-libs/yajl
-	>=dev-libs/libpcre-7.8
-	>=dev-libs/boost-1.55
+	dev-qt/designer:5
+	dev-qt/qtcore:5
+	dev-qt/qtgui:5
+	dev-qt/qtmultimedia:5
+	dev-qt/qtnetwork:5
+	dev-qt/qtopengl:5
+	dev-qt/qtwidgets:5
+	media-libs/glu
+	sys-libs/zlib
 "
 RDEPEND="${DEPEND}
 	dev-lua/lrexlib[pcre]
-	dev-lua/luazip
 	dev-lua/luafilesystem
 	dev-lua/luasql[sqlite3]
+	dev-lua/luazip
 "
-
 # Build time dependencies
 DEPEND+="
 "
@@ -59,7 +67,8 @@ DEPEND+="
 src_prepare() {
 	sed -i \
 		-e 's|-llua5.1|-llua|g' \
-		src/src.pro
+		src/src.pro || die "sed failed"
+
 	epatch "${FILESDIR}/mudlet-lua.patch"
 	epatch_user
 }
