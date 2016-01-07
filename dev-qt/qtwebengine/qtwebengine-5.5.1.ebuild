@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 
 inherit python-any-r1 qt5-build
 
-DESCRIPTION="Support library for rendering dynamic web content in Qt5 C++ and QML applications"
+DESCRIPTION="Library for rendering dynamic web content in Qt5 C++ and QML applications"
 
 if [[ ${QT5_BUILD_TYPE} == release ]]; then
 	KEYWORDS="~amd64 ~x86"
@@ -20,7 +20,7 @@ DEPEND="
 	${PYTHON_DEPS}
 	>=dev-qt/qtcore-${PV}:5
 	qml? ( >=dev-qt/qtdeclarative-${PV}:5 )
-	>=dev-qt/qtwebchannel-${PV}:5
+	>=dev-qt/qtwebchannel-${PV}:5[qml]
 	>=dev-qt/qtxmlpatterns-${PV}:5
 	dev-libs/nss
 	x11-libs/libXcomposite
