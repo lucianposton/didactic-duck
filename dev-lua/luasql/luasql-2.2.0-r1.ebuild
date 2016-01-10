@@ -10,7 +10,7 @@ SRC_URI="https://github.com/downloads/keplerproject/luasql/${P}.tar.gz"
 
 LICENSE="Kepler"
 SLOT="0"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 
 # we don't support unixODBC and Oracle databases yet
 MODULES="sqlite sqlite3 mysql postgres"
