@@ -21,7 +21,7 @@ HOMEPAGE="https://github.com/ethereum/go-ethereum"
 
 LICENSE="GPL-3+ LGPL-3+"
 SLOT="0"
-IUSE=""
+IUSE="evm"
 
 DEPEND="
 	dev-lang/go
@@ -31,7 +31,16 @@ RDEPEND="${DEPEND}"
 DEPEND+=""
 
 src_prepare() {
+	sed -i \
+		-e 's|\$(GOROOT)/bin/go|go|g' \
+		Makefile
+
 	epatch_user
+}
+
+src_compile() {
+	emake geth
+	use evm && emake evm
 }
 
 src_install() {
@@ -39,4 +48,5 @@ src_install() {
 		[[ -s "${d}" ]] && dodoc "${d}"
 	done
 	dobin build/bin/geth
+	use evm && dobin build/bin/evm
 }
