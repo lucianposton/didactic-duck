@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,7 +6,7 @@ EAPI=5
 
 inherit eutils multilib git-r3
 
-DESCRIPTION="LuaZip is a lightweight Lua extension library used to read files stored inside zip files. The API is very similar to the standard Lua I/O library API."
+DESCRIPTION="LuaZip is a lightweight lua library to read files from zip archives."
 HOMEPAGE="https://github.com/msva/luazip"
 EGIT_REPO_URI="https://github.com/msva/luazip.git"
 
@@ -17,12 +17,12 @@ else
 	EGIT_COMMIT="v${PV}"
 fi
 
-LICENSE="GPL"
+LICENSE="MIT"
 SLOT="0"
 IUSE=""
 
 DEPEND="
-	>=dev-lang/lua-5.1
+	>=dev-lang/lua-5.1:*
 	dev-libs/zziplib
 "
 RDEPEND="${DEPEND}"

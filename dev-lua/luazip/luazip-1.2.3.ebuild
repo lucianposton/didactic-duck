@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,23 +6,22 @@ EAPI=5
 
 inherit versionator multilib
 
-DESCRIPTION="LuaZip is a lightweight Lua extension library used to read files stored inside zip files. The API is very similar to the standard Lua I/O library API."
+DESCRIPTION="LuaZip is a lightweight lua library to read files from zip archives."
 HOMEPAGE="http://www.keplerproject.org/luazip/index.html"
 MY_PV=$(replace_all_version_separators '_')
 SRC_URI="https://github.com/luaforge/${PN}/archive/v${MY_PV}.zip"
 
-LICENSE="GPL"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
 IUSE=""
 
 DEPEND="
-	>=dev-lang/lua-5.1
+	>=dev-lang/lua-5.1:*
 	dev-libs/zziplib
 	sys-libs/zlib
 "
 RDEPEND="${DEPEND}"
-
 
 lua_version() {
 	local luaver=
@@ -51,7 +50,6 @@ lua_install_cmodule() {
 	insinto /usr/$(get_libdir)/lua/${LUAVER}/${2}
 	doins ${1} || die "doins failed"
 }
-
 
 src_unpack() {
 	unpack ${A}
