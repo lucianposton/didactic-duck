@@ -21,7 +21,7 @@ Create a `/etc/portage/repos.conf/didactic-duck.conf` file containing:
 location = /usr/local/portage/didactic-duck
 sync-type = git
 sync-uri = https://github.com/lucianposton/didactic-duck.git
-priority=9999
+priority = 9999
 ```
 
 Afterwards, run `emerge --sync` to sync the overlay. The overlay's ebuilds are now available to emerge.
