@@ -4,9 +4,10 @@ Just some ebuilds that may or may not work.
 
 # How to add this overlay with layman
 
-Use layman to add and manage this overlay. Following the instructions from the [Gentoo Wiki](http://wiki.gentoo.org/wiki/Layman#Adding_custom_overlays):
+After installing [layman](http://wiki.gentoo.org/wiki/Layman) with
+`emerge layman`, add this overlay:
 
-	layman -o https://raw.github.com/lucianposton/didactic-duck/master/repositories.xml -f -a didactic-duck
+	layman -fa didactic-duck
 
 The overlay's ebuilds are now available to emerge.
 
