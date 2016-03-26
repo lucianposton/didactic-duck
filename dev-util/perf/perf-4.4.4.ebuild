@@ -43,7 +43,7 @@ IUSE="audit debug +demangle +doc gtk numa perl python slang unwind"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="audit? ( sys-process/audit )
-	demangle? ( sys-devel/binutils:= )
+	demangle? ( sys-libs/binutils-libs:= )
 	gtk? ( x11-libs/gtk+:2 )
 	numa? ( sys-process/numactl )
 	perl? ( dev-lang/perl )
