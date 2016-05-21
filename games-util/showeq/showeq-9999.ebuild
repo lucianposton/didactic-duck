@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -38,7 +38,7 @@ HOMEPAGE="https://github.com/lucianposton/showeq"
 DESCRIPTION="Realtime packet analyser for EverQuest"
 
 LICENSE="GPL-2"
-IUSE=""
+IUSE="+filters +maps -mapfiend"
 
 DEPEND="
 	dev-qt/qt-meta:3
@@ -46,7 +46,11 @@ DEPEND="
 	sys-libs/zlib
 	sys-libs/gdbm
 "
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	filters? ( games-util/showeq-filters:${SLOT} )
+	maps? ( games-util/showeq-maps:${SLOT} )
+	mapfiend? ( games-util/showeq-mapfiend:${SLOT} )
+"
 # dev-perl/Unicode-String is required by spells_en2spellsh.pl to regenerate
 # staticspells.h when spells_us.txt is updated
 
