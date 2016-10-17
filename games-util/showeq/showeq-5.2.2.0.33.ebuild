@@ -74,6 +74,9 @@ src_prepare() {
 		cp showeq.1 "showeq${PROGRAM_SUFFIX}.1"
 	fi
 
+	# Don't include doxygen since we aren't building doxygen targets
+	sed -i -e "s:include doxygen.am:#include doxygen.am:" Makefile.am
+
 	epatch_user
 	eautoreconf
 }
