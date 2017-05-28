@@ -11,7 +11,7 @@ EQ_SERVER="live"
 if [[ "${EQ_SERVER}" == "live" ]]; then
 	SLOT="live"
 	PROGRAM_SUFFIX=""
-	EGIT_REPO_URI="https://github.com/ShowEQ/ShowEQ.git"
+	EGIT_REPO_URI="https://github.com/lucianposton/showeq.git"
 
 	if [[ ${PV} == 9999* ]]; then
 		KEYWORDS=""
