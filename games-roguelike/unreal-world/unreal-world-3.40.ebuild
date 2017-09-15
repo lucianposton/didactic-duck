@@ -15,14 +15,14 @@ MY_PNV="${MY_PN}-${PV}"
 # Unreal World is free shareware as of v3.19. Thanks, Sami and Erkka!
 DESCRIPTION="Fantasy roguelike set in the far north during the late Iron-Age"
 HOMEPAGE="http://www.unrealworld.fi"
-SRC_URI_DIRNAME="${HOMEPAGE}/dl/linux/deb-ubuntu/10.04/"
+SRC_URI_DIRNAME="${HOMEPAGE}/dl/${PV}/linux/deb-ubuntu/14.04/"
 S_PREFIX="${MY_PNV}-"
 S_SUFFIX="-linux-gnu"
 
 # Note the duplication of such basenames (sans filetype) below.
 SRC_URI="
 	amd64? ( ${SRC_URI_DIRNAME}${S_PREFIX}x86_64${S_SUFFIX}.tar.gz )
-	x86?   ( ${SRC_URI_DIRNAME}${S_PREFIX}i486${S_SUFFIX}.tar.gz )
+	x86?   ( ${SRC_URI_DIRNAME}${S_PREFIX}i686${S_SUFFIX}.tar.gz )
 "
 
 LICENSE="unreal-world"
@@ -44,10 +44,9 @@ IUSE=""
 #   dependency "virtual/libc".
 RDEPEND="
 	net-misc/curl:0=[ssl]
-	media-libs/libsdl:0=
-	media-libs/sdl-image:0=[jpeg,png]
-	media-libs/sdl-mixer:0=[vorbis,wav]
-	sys-devel/gcc[cxx]
+	media-libs/libsdl2:0=
+	media-libs/sdl2-image:0=[jpeg,png]
+	media-libs/sdl2-mixer:0=[vorbis,wav]
 "
 	#net-misc/curl:0=[ssl,curl_ssl_gnutls,-curl_ssl_openssl]
 
@@ -60,7 +59,7 @@ pkg_setup() {
 	# The source directory depends on the current architecture.
 	if use amd64
 	then S="${WORKDIR}/${S_PREFIX}x86_64${S_SUFFIX}"
-	else S="${WORKDIR}/${S_PREFIX}i486${S_SUFFIX}"
+	else S="${WORKDIR}/${S_PREFIX}i686${S_SUFFIX}"
 	fi
 }
 
@@ -71,7 +70,7 @@ src_install() {
 
 	# Documentation to be installed.
 	local -a URW_DOC_BASENAMES; URW_DOC_BASENAMES=(
-		OLDNEWS.TXT URW.DOC news.txt )
+		OLDNEWS.TXT news.txt )
 
 	# Remove SDL-specific documentation, as Gentoo already supplies such
 	# documentation if requested on SDL installation.
