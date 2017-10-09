@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>lucianposton@gmail.com</email>
+		<name>Lucian Poston</name>
+	</maintainer>
+	<use>
+		<flag name='system-capstone'>Use <pkg>dev-libs/capstone</pkg> instead of bundled copy.</flag>
+	</use>
+</pkgmetadata>
