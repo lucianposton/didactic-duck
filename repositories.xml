@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<repositories encoding="UTF-8" version="1.1">
-  <repo priority="50" quality="experimental">
+<repositories version="1.0">
+  <repo priority="50" quality="experimental" status="unofficial">
     <name>didactic-duck</name>
     <description>Some ebuilds that might work</description>
     <homepage>https://github.com/lucianposton/didactic-duck</homepage>
-    <owner>
+    <owner type="person">
       <email>lucianposton@gmail.com</email>
       <name>Lucian Poston</name>
     </owner>
