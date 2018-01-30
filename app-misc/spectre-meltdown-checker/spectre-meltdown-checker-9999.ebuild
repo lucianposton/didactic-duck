@@ -18,5 +18,5 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_install() {
-	dobin "spectre-meltdown-checker.sh"
+	newbin spectre-meltdown-checker.sh spectre-meltdown-checker
 }
