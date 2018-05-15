@@ -5,7 +5,7 @@ EAPI=6
 
 inherit rpm
 
-DESCRIPTION="Bridges ProtonMail with IMAP/SMTP clients"
+DESCRIPTION="Serves ProtonMail to IMAP/SMTP clients"
 HOMEPAGE="https://protonmail.com/bridge/"
 SRC_URI="https://protonmail.com/download/${P}-1.x86_64.rpm"
 
