@@ -28,4 +28,10 @@ S="${WORKDIR}"
 src_install() {
 	# Using doins -r would strip executable bits from all binaries
 	cp -pPR "${S}"/usr "${D}"/ || die "Failed to copy files"
+
+	cat <<EOF > "${T}/50-${PN}"
+SEARCH_DIRS_MASK="/usr/lib*/protonmail/bridge"
+EOF
+	insinto /etc/revdep-rebuild
+	doins "${T}/50-${PN}"
 }
