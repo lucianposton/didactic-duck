@@ -9,7 +9,9 @@ DESCRIPTION="Serves ProtonMail to IMAP/SMTP clients"
 HOMEPAGE="https://protonmail.com/bridge/"
 SRC_URI="https://protonmail.com/download/${P}-1.x86_64.rpm"
 
-LICENSE="MIT"
+RESTRICT="mirror"
+
+LICENSE="MIT protonmail-bridge-EULA"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
@@ -24,6 +26,8 @@ RDEPEND="
 "
 
 S="${WORKDIR}"
+
+QA_PREBUILT="*"
 
 src_install() {
 	# Using doins -r would strip executable bits from all binaries
