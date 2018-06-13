@@ -13,7 +13,7 @@ RDEPEND="
 	app-editors/vim
 	app-text/extract_url
 	mail-client/neomutt
-	mail-mta/protonmail-bridge-bin
+	mail-mta/protonmail-bridge
 	virtual/w3m
 "
 	#net-mail/isync
