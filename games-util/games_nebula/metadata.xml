@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<use>
+		<flag name="cab">Support extracting Windows CAB archives</flag>
+		<flag name="dosbox">Supprt running dos games in dosbox</flag>
+		<flag name="mega">Support downloading game addons from mega</flag>
+		<flag name="scummvm">Support running ScummVM games</flag>
+		<flag name="wine">Support running Windows games in wine</flag>
+	</use>
+</pkgmetadata>
