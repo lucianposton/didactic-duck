@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Neomutt and dependencies for my setup"
+DESCRIPTION="Dependencies for my dotfiles"
 
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
