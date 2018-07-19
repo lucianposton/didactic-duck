@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit eutils unpacker versionator xdg
+inherit eutils unpacker xdg
 
 DESCRIPTION="Editor for the Unity game engine"
 HOMEPAGE="https://unity3d.com/"
@@ -43,6 +43,7 @@ DEPEND="
 	app-arch/xar
 	app-arch/gzip
 	app-arch/cpio
+	darkskin? ( dev-util/radare2 )
 "
 RDEPEND="
 	sys-libs/glibc[multilib]
@@ -98,7 +99,6 @@ RDEPEND="
 	)
 "
 #	dev-dotnet/gnome-sharp
-BDEPEND="darkskin? ( dev-util/radare2 )"
 
 S="${WORKDIR}"
 
