@@ -10,26 +10,31 @@ HOMEPAGE="https://unity3d.com/"
 # https://forum.unity.com/threads/unity-on-linux-release-notes-and-known-issues.350256/
 
 HASH="3709a3f954c1"
+SRC_URI_BASE="https://beta.unity3d.com/download/${HASH}"
 
-#REL="$(get_version_component_range 4)"
-#REL="${REL/rc/f}"
-#REL="${REL/beta/b}"
-#VER="$(get_version_component_range 1-3)${REL}"
-
-VER="${PV/_p/}"
+MY_PV="${PV/_p/}"
 
 SRC_URI="
-	https://beta.unity3d.com/download/${HASH}/LinuxEditorInstaller/Unity.tar.xz -> ${P}-Unity.tar.xz
-	https://beta.unity3d.com/download/${HASH}/MacStandardAssetsInstaller/StandardAssets.pkg -> ${P}-StandardAssets.pkg
-	doc? ( https://beta.unity3d.com/download/${HASH}/MacDocumentationInstaller/Documentation.pkg -> ${P}-Documentation.pkg )
-	examples? ( https://beta.unity3d.com/download/${HASH}/MacExampleProjectInstaller/Examples.pkg -> ${P}-Examples.pkg )
-
-	android? ( https://beta.unity3d.com/download/${HASH}/MacEditorTargetInstaller/UnitySetup-Android-Support-for-Editor-${VER}.pkg -> ${P}-UnitySetup-Android-Support-for-Editor-${VER}.pkg )
-	ios? ( https://beta.unity3d.com/download/${HASH}/LinuxEditorTargetInstaller/UnitySetup-iOS-Support-for-Editor-${VER}.tar.xz -> ${P}-UnitySetup-iOS-Support-for-Editor-${VER}.tar.xz )
-	mac? ( https://beta.unity3d.com/download/${HASH}/MacEditorTargetInstaller/UnitySetup-Mac-Mono-Support-for-Editor-${VER}.pkg -> ${P}-UnitySetup-Mac-Mono-Support-for-Editor-${VER}.pkg )
-	webgl? ( https://beta.unity3d.com/download/${HASH}/LinuxEditorTargetInstaller/UnitySetup-WebGL-Support-for-Editor-${VER}.tar.xz -> ${P}-UnitySetup-WebGL-Support-for-Editor-${VER}.tar.xz )
-	windows? ( https://beta.unity3d.com/download/${HASH}/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-${VER}.pkg -> ${P}-UnitySetup-Windows-Mono-Support-for-Editor-${VER}.pkg )
-	facebook? ( https://beta.unity3d.com/download/${HASH}/MacEditorTargetInstaller/UnitySetup-Facebook-Games-Support-for-Editor-${VER}.pkg -> ${P}-UnitySetup-Facebook-Games-Support-for-Editor-${VER}.pkg )
+	${SRC_URI_BASE}/LinuxEditorInstaller/Unity.tar.xz
+		-> ${P}-Unity.tar.xz
+	${SRC_URI_BASE}/MacStandardAssetsInstaller/StandardAssets.pkg
+		-> ${P}-StandardAssets.pkg
+	doc? ( ${SRC_URI_BASE}/MacDocumentationInstaller/Documentation.pkg
+		-> ${P}-Documentation.pkg )
+	examples? ( ${SRC_URI_BASE}/MacExampleProjectInstaller/Examples.pkg
+		-> ${P}-Examples.pkg )
+	android? ( ${SRC_URI_BASE}/MacEditorTargetInstaller/UnitySetup-Android-Support-for-Editor-${MY_PV}.pkg
+		-> ${P}-UnitySetup-Android-Support-for-Editor-${MY_PV}.pkg )
+	ios? ( ${SRC_URI_BASE}/LinuxEditorTargetInstaller/UnitySetup-iOS-Support-for-Editor-${MY_PV}.tar.xz
+		-> ${P}-UnitySetup-iOS-Support-for-Editor-${MY_PV}.tar.xz )
+	mac? ( ${SRC_URI_BASE}/MacEditorTargetInstaller/UnitySetup-Mac-Mono-Support-for-Editor-${MY_PV}.pkg
+		-> ${P}-UnitySetup-Mac-Mono-Support-for-Editor-${MY_PV}.pkg )
+	webgl? ( ${SRC_URI_BASE}/LinuxEditorTargetInstaller/UnitySetup-WebGL-Support-for-Editor-${MY_PV}.tar.xz
+		-> ${P}-UnitySetup-WebGL-Support-for-Editor-${MY_PV}.tar.xz )
+	windows? ( ${SRC_URI_BASE}/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-${MY_PV}.pkg
+		-> ${P}-UnitySetup-Windows-Mono-Support-for-Editor-${MY_PV}.pkg )
+	facebook? ( ${SRC_URI_BASE}/MacEditorTargetInstaller/UnitySetup-Facebook-Games-Support-for-Editor-${MY_PV}.pkg
+		-> ${P}-UnitySetup-Facebook-Games-Support-for-Editor-${MY_PV}.pkg )
 "
 
 LICENSE="Unity-EULA"
@@ -98,7 +103,6 @@ RDEPEND="
 		virtual/jdk
 	)
 "
-#	dev-dotnet/gnome-sharp
 
 S="${WORKDIR}"
 
@@ -124,9 +128,9 @@ src_unpack() {
 
 		mkdir "$name" || die
 
-		pushd "$name" >/dev/null
+		pushd "$name" || die
 		[[ "$src" == *.pkg ]] && unpkg "$src" || unpack "$src"
-		popd >/dev/null
+		popd || die
 	done
 }
 
@@ -156,22 +160,22 @@ src_install() {
 	fi
 
 	if use android; then
-		cp -a "${P}"-UnitySetup-Android-Support-for-Editor-"${VER}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer || die
+		cp -a "${P}"-UnitySetup-Android-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer || die
 	fi
 	if use ios; then
-		cp -a "${P}"-UnitySetup-iOS-Support-for-Editor-"${VER}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/iOSSupport || die
+		cp -a "${P}"-UnitySetup-iOS-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/iOSSupport || die
 	fi
 	if use mac; then
-		cp -a "${P}"-UnitySetup-Mac-Mono-Support-for-Editor-"${VER}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/MacStandaloneSupport || die
+		cp -a "${P}"-UnitySetup-Mac-Mono-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/MacStandaloneSupport || die
 	fi
 	if use webgl; then
-		cp -a "${P}"-UnitySetup-WebGL-Support-for-Editor-"${VER}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/WebGLSupport || die
+		cp -a "${P}"-UnitySetup-WebGL-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/WebGLSupport || die
 	fi
 	if use windows; then
-		cp -a "${P}"-UnitySetup-Windows-Mono-Support-for-Editor-"${VER}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/WindowsStandaloneSupport || die
+		cp -a "${P}"-UnitySetup-Windows-Mono-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/WindowsStandaloneSupport || die
 	fi
 	if use facebook; then
-		cp -a "${P}"-UnitySetup-Facebook-Games-Support-for-Editor-"${VER}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/Facebook || die
+		cp -a "${P}"-UnitySetup-Facebook-Games-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/Facebook || die
 	fi
 
 	doicon "${FILESDIR}"/unity-editor-icon.png
