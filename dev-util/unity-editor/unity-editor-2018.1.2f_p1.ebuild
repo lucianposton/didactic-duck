@@ -60,7 +60,7 @@ RDEPEND="
 	media-libs/mesa
 	dev-libs/glib:2
 	virtual/glu
-	x11-libs/gtk+:2
+	x11-libs/gtk+:3
 	dev-dotnet/gtk-sharp
 	dev-lang/mono
 	dev-libs/nspr
