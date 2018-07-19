@@ -35,7 +35,7 @@ SRC_URI="
 LICENSE="Unity-EULA"
 SLOT="0"
 KEYWORDS="-* ~amd64"
-IUSE="android doc examples facebook ios +mac webgl +windows"
+IUSE="android darkskin doc examples facebook ios +mac webgl +windows"
 
 REQUIRE_USE="facebook? ( webgl windows )"
 
@@ -98,6 +98,7 @@ RDEPEND="
 	)
 "
 #	dev-dotnet/gnome-sharp
+BDEPEND="darkskin? ( dev-util/radare2 )"
 
 S="${WORKDIR}"
 
@@ -127,6 +128,18 @@ src_unpack() {
 		[[ "$src" == *.pkg ]] && unpkg "$src" || unpack "$src"
 		popd >/dev/null
 	done
+}
+
+src_prepare() {
+	if use darkskin; then
+		cat <<-EOF > "${T}/darkskin.rapatch" || die
+			:s method.EditorResources.GetSkinIdx__const
+			:s/x 74
+			:wao nop
+		EOF
+		r2 -w -q -P "${T}"/darkskin.rapatch "${P}"-Unity/Editor/Unity
+	fi
+	default
 }
 
 src_install() {
