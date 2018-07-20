@@ -34,7 +34,7 @@ SRC_URI="
 LICENSE="Unity-EULA"
 SLOT="${PV}"
 KEYWORDS="-* ~amd64"
-IUSE="android darkskin doc examples facebook ios mac webgl windows"
+IUSE="android darkskin doc facebook ios mac webgl windows"
 
 REQUIRED_USE="facebook? ( webgl windows )"
 
