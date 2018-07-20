@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit desktop eutils unpacker xdg
+inherit check-reqs desktop eutils unpacker xdg
 
 DESCRIPTION="Editor to create games on the Unity engine"
 HOMEPAGE="https://unity3d.com/"
@@ -102,6 +102,28 @@ S="${WORKDIR}"
 
 RESTRICT="bindist mirror strip"
 QA_PREBUILT="*"
+
+pre_build_checks() {
+	# required components + largest component that can be cp'd during install
+	CHECKREQS_DISK_BUILD="$((3200 + 3300))"
+	use doc && CHECKREQS_DISK_BUILD="$(($CHECKREQS_DISK_BUILD + 1000))"
+	use android && CHECKREQS_DISK_BUILD="$(($CHECKREQS_DISK_BUILD + 1400))"
+	use ios && CHECKREQS_DISK_BUILD="$(($CHECKREQS_DISK_BUILD + 3300))"
+	use mac && CHECKREQS_DISK_BUILD="$(($CHECKREQS_DISK_BUILD + 200))"
+	use webgl && CHECKREQS_DISK_BUILD="$(($CHECKREQS_DISK_BUILD + 1000))"
+	use windows && CHECKREQS_DISK_BUILD="$(($CHECKREQS_DISK_BUILD + 1400))"
+	use facebook && CHECKREQS_DISK_BUILD="$(($CHECKREQS_DISK_BUILD + 200))"
+	CHECKREQS_DISK_BUILD="$(($CHECKREQS_DISK_BUILD / 1000 + 1))G"
+	check-reqs_pkg_setup
+}
+
+pkg_pretend() {
+	pre_build_checks
+}
+
+pkg_setup() {
+	pre_build_checks
+}
 
 src_unpack() {
 	unpkg() {
