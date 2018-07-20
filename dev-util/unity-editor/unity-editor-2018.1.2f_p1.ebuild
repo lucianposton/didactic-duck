@@ -36,7 +36,7 @@ SRC_URI="
 "
 
 LICENSE="Unity-EULA"
-SLOT="0"
+SLOT="${PV}"
 KEYWORDS="-* ~amd64"
 IUSE="android darkskin doc examples facebook ios mac webgl windows"
 
@@ -141,7 +141,7 @@ src_prepare() {
 }
 
 src_install() {
-	local unity_dir="${D}/opt/Unity"
+	local unity_dir="${D}/opt/${P}"
 	local data_dir="${unity_dir}/Editor/Data"
 	local engines_dir="${data_dir}/PlaybackEngines"
 
@@ -188,7 +188,7 @@ src_install() {
 	doicon "${FILESDIR}"/unity-editor-icon.png
 	domenu "${FILESDIR}"/unity-editor.desktop
 
-	make_wrapper unity-editor /opt/Unity/Editor/Unity
+	make_wrapper "${P}" /opt/"${P}"/Editor/Unity
 }
 
 pkg_postinst() {
