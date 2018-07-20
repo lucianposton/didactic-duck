@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Unity
-Exec=/opt/Unity/Editor/Unity %U
-Icon=unity-editor-icon
+Exec=/opt/${P}/Editor/Unity %U
+Icon=${P}-icon
 Terminal=false
 Type=Application
 StartupNotify=true

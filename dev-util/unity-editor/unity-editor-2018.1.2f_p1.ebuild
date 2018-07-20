@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit eutils unpacker xdg
+inherit desktop eutils unpacker xdg
 
 DESCRIPTION="Editor to create games on the Unity engine"
 HOMEPAGE="https://unity3d.com/"
@@ -137,6 +137,7 @@ src_prepare() {
 		EOF
 		r2 -w -q -P "${T}"/darkskin.rapatch "${P}"/Editor/Unity
 	fi
+	sed -e 's/\${P}/'"${P}/" "${FILESDIR}/${PN}".desktop > "${T}/${PN}".desktop
 	default
 }
 
@@ -185,10 +186,9 @@ src_install() {
 		rm -r "${P}"-facebook || die
 	fi
 
-	doicon "${FILESDIR}"/unity-editor-icon.png
-	domenu "${FILESDIR}"/unity-editor.desktop
-
 	make_wrapper "${P}" /opt/"${P}"/Editor/Unity
+	newicon -s 256 "${FILESDIR}/${PN}"-icon.png "${P}"-icon.png
+	newmenu "${T}/${PN}".desktop "${P}".desktop
 }
 
 pkg_postinst() {
