@@ -3,6 +3,7 @@
 <pkgmetadata>
 	<use>
 		<flag name="android">Enable Android target support</flag>
+		<flag name="darkskin">Use dark skin GUI theme</flag>
 		<flag name="facebook">Enable Facebook Games target support</flag>
 		<flag name="ios">Enable iOS target support</flag>
 		<flag name="mac">Enable Mac Standalone target support</flag>
