@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Unity
+Name=Unity-${MY_PV}
 Exec=/opt/${P}/Editor/Unity %U
 Icon=${P}-icon
 Terminal=false

@@ -133,7 +133,8 @@ src_prepare() {
 		EOF
 		r2 -w -q -P "${T}"/darkskin.rapatch "${P}"/Editor/Unity
 	fi
-	sed -e 's/\${P}/'"${P}/" "${FILESDIR}/${PN}".desktop > "${T}/${PN}".desktop
+	sed -e 's/\${MY_PV}/'"${MY_PV}/" -e 's/\${P}/'"${P}/" \
+		"${FILESDIR}/${PN}".desktop > "${T}/${PN}".desktop
 	default
 }
 
