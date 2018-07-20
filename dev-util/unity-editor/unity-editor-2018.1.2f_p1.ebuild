@@ -5,44 +5,42 @@ EAPI=6
 
 inherit eutils unpacker xdg
 
-DESCRIPTION="Editor for the Unity game engine"
+DESCRIPTION="Editor to create games on the Unity engine"
 HOMEPAGE="https://unity3d.com/"
 # https://forum.unity.com/threads/unity-on-linux-release-notes-and-known-issues.350256/
 
+MY_PV="${PV/_p/}"
 HASH="3709a3f954c1"
 SRC_URI_BASE="https://beta.unity3d.com/download/${HASH}"
-
-MY_PV="${PV/_p/}"
-
 SRC_URI="
 	${SRC_URI_BASE}/LinuxEditorInstaller/Unity.tar.xz
-		-> ${P}-Unity.tar.xz
+		-> ${P}.tar.xz
 	${SRC_URI_BASE}/MacStandardAssetsInstaller/StandardAssets.pkg
 		-> ${P}-StandardAssets.pkg
 	doc? ( ${SRC_URI_BASE}/MacDocumentationInstaller/Documentation.pkg
-		-> ${P}-Documentation.pkg )
+		-> ${P}-doc.pkg )
 	examples? ( ${SRC_URI_BASE}/MacExampleProjectInstaller/Examples.pkg
-		-> ${P}-Examples.pkg )
+		-> ${P}-examples.pkg )
 	android? ( ${SRC_URI_BASE}/MacEditorTargetInstaller/UnitySetup-Android-Support-for-Editor-${MY_PV}.pkg
-		-> ${P}-UnitySetup-Android-Support-for-Editor-${MY_PV}.pkg )
+		-> ${P}-android.pkg )
 	ios? ( ${SRC_URI_BASE}/LinuxEditorTargetInstaller/UnitySetup-iOS-Support-for-Editor-${MY_PV}.tar.xz
-		-> ${P}-UnitySetup-iOS-Support-for-Editor-${MY_PV}.tar.xz )
+		-> ${P}-ios.tar.xz )
 	mac? ( ${SRC_URI_BASE}/MacEditorTargetInstaller/UnitySetup-Mac-Mono-Support-for-Editor-${MY_PV}.pkg
-		-> ${P}-UnitySetup-Mac-Mono-Support-for-Editor-${MY_PV}.pkg )
+		-> ${P}-mac.pkg )
 	webgl? ( ${SRC_URI_BASE}/LinuxEditorTargetInstaller/UnitySetup-WebGL-Support-for-Editor-${MY_PV}.tar.xz
-		-> ${P}-UnitySetup-WebGL-Support-for-Editor-${MY_PV}.tar.xz )
+		-> ${P}-webgl.tar.xz )
 	windows? ( ${SRC_URI_BASE}/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-${MY_PV}.pkg
-		-> ${P}-UnitySetup-Windows-Mono-Support-for-Editor-${MY_PV}.pkg )
+		-> ${P}-windows.pkg )
 	facebook? ( ${SRC_URI_BASE}/MacEditorTargetInstaller/UnitySetup-Facebook-Games-Support-for-Editor-${MY_PV}.pkg
-		-> ${P}-UnitySetup-Facebook-Games-Support-for-Editor-${MY_PV}.pkg )
+		-> ${P}-facebook.pkg )
 "
 
 LICENSE="Unity-EULA"
 SLOT="0"
 KEYWORDS="-* ~amd64"
-IUSE="android darkskin doc examples facebook ios +mac webgl +windows"
+IUSE="android darkskin doc examples facebook ios mac webgl windows"
 
-REQUIRE_USE="facebook? ( webgl windows )"
+REQUIRED_USE="facebook? ( webgl windows )"
 
 DEPEND="
 	app-arch/xar
@@ -106,30 +104,26 @@ RDEPEND="
 
 S="${WORKDIR}"
 
-RESTRICT="bindist mirror preserve-libs strip"
+RESTRICT="bindist mirror strip"
 QA_PREBUILT="*"
 
 src_unpack() {
 	unpkg() {
-		echo ">>> Unpacking $1 to $(pwd)"
-		mkdir .pkg || die
-		xar -C .pkg -xf "${DISTDIR}/$1" || die
-		mv .pkg/*.pkg.tmp/Payload .pkg/Payload.cpio.gz || die
-		gunzip .pkg/Payload.cpio.gz || die
-		cpio --quiet -i <.pkg/Payload.cpio || die
-		rm -rf .pkg || die
+		mkdir "tmp" || die
+		xar -C tmp -xf "${DISTDIR}/${1}" || die
+		mv tmp/*.pkg.tmp/Payload Payload.cpio.gz || die
+		unpacker Payload.cpio.gz
+		rm -r tmp Payload.cpio.gz || die
 	}
 
-	for src in $A; do
-		name="$(basename "$src")"
-		name="${name%.xz}"
-		name="${name%.tar}"
-		name="${name%.pkg}"
-
-		mkdir "$name" || die
-
-		pushd "$name" || die
-		[[ "$src" == *.pkg ]] && unpkg "$src" || unpack "$src"
+	local src_file dest_dir
+	for src_file in $A; do
+		dest_dir="$(basename "${src_file}")"
+		dest_dir="${dest_dir%.tar.xz}"
+		dest_dir="${dest_dir%.pkg}"
+		mkdir "${dest_dir}" || die
+		pushd "${dest_dir}" || die
+		[[ "${src_file}" == *.pkg ]] && unpkg "${src_file}" || unpack "${src_file}"
 		popd || die
 	done
 }
@@ -141,41 +135,54 @@ src_prepare() {
 			:s/x 74
 			:wao nop
 		EOF
-		r2 -w -q -P "${T}"/darkskin.rapatch "${P}"-Unity/Editor/Unity
+		r2 -w -q -P "${T}"/darkskin.rapatch "${P}"/Editor/Unity
 	fi
 	default
 }
 
 src_install() {
-	mkdir -p "${D}"/opt || die
-	cp -a "${P}"-Unity "${D}"/opt/Unity || die
-	cp -a "${P}"-StandardAssets "${D}"/opt/Unity/Editor/Standard\ Assets || die
+	local unity_dir="${D}/opt/Unity"
+	local data_dir="${unity_dir}/Editor/Data"
+	local engines_dir="${data_dir}/PlaybackEngines"
 
+	mkdir -p "${D}"/opt || die
+	cp -a "${P}" "${unity_dir}" || die
+	rm -r "${P}" || die
+	cp -a "${P}"-StandardAssets "${unity_dir}"/Editor/Standard\ Assets || die
+	rm -r "${P}"-StandardAssets || die
 	if use doc; then
-		cp -a "${P}"-Documentation/Documentation "${D}"/opt/Unity/Editor/Data/Documentation || die
-		cp -a "${P}"-Documentation/Documentation.html "${D}"/opt/Unity/Editor/Data/Documentation.html || die
+		cp -a "${P}"-doc/Documentation "${data_dir}"/Documentation || die
+		cp -a "${P}"-doc/Documentation.html "${data_dir}"/Documentation.html || die
+		rm -r "${P}"-doc || die
 	fi
 	if use examples; then
-		cp -a "${P}"-Examples/Standard\ Assets\ Example\ Project "${D}"/opt/Unity/Standard\ Assets\ Example\ Project || die
+		cp -a "${P}-examples/Standard Assets Example Project" \
+			"${unity_dir}/Standard Assets Example Project" || die
+		rm -r "${P}"-examples || die
 	fi
-
 	if use android; then
-		cp -a "${P}"-UnitySetup-Android-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer || die
+		cp -a "${P}"-android "${engines_dir}"/AndroidPlayer || die
+		rm -r "${P}"-android || die
 	fi
 	if use ios; then
-		cp -a "${P}"-UnitySetup-iOS-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/iOSSupport || die
+		cp -a "${P}"-ios/* "${unity_dir}" || die
+		rm -r "${P}"-ios || die
 	fi
 	if use mac; then
-		cp -a "${P}"-UnitySetup-Mac-Mono-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/MacStandaloneSupport || die
+		cp -a "${P}"-mac "${engines_dir}"/MacStandaloneSupport || die
+		rm -r "${P}"-mac || die
 	fi
 	if use webgl; then
-		cp -a "${P}"-UnitySetup-WebGL-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/WebGLSupport || die
+		cp -a "${P}"-webgl/* "${unity_dir}" || die
+		rm -r "${P}"-webgl || die
 	fi
 	if use windows; then
-		cp -a "${P}"-UnitySetup-Windows-Mono-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/WindowsStandaloneSupport || die
+		cp -a "${P}"-windows "${engines_dir}"/WindowsStandaloneSupport || die
+		rm -r "${P}"-windows || die
 	fi
 	if use facebook; then
-		cp -a "${P}"-UnitySetup-Facebook-Games-Support-for-Editor-"${MY_PV}" "${D}"/opt/Unity/Editor/Data/PlaybackEngines/Facebook || die
+		cp -a "${P}"-facebook "${engines_dir}"/Facebook || die
+		rm -r "${P}"-facebook || die
 	fi
 
 	doicon "${FILESDIR}"/unity-editor-icon.png
