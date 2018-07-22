@@ -183,7 +183,7 @@ src_install() {
 	fi
 
 	make_wrapper "${P}" /opt/"${P}"/Editor/Unity
-	newicon -s 256 "${FILESDIR}/${PN}"-icon.png "${P}"-icon.png
+	newicon -s 256 "${data_dir}"/Resources/LargeUnityIcon.png "${P}"-icon.png
 	newmenu "${T}/${PN}".desktop "${P}".desktop
 }
 
