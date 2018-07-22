@@ -39,62 +39,34 @@ IUSE="android darkskin doc facebook ios mac webgl windows"
 REQUIRED_USE="facebook? ( webgl windows )"
 
 DEPEND="
-	app-arch/xar
-	app-arch/gzip
 	app-arch/cpio
+	app-arch/gzip
+	app-arch/xar
 	darkskin? ( dev-util/radare2 )
 "
 RDEPEND="
-	sys-libs/glibc[multilib]
-	media-libs/alsa-lib
-	x11-libs/cairo
-	sys-libs/libcap
-	net-print/cups
-	sys-apps/dbus
-	dev-libs/expat
-	media-libs/fontconfig
-	media-libs/freetype
-	gnome-base/gconf
-	x11-libs/gdk-pixbuf
-	media-libs/mesa
-	dev-libs/glib:2
-	virtual/glu
-	x11-libs/gtk+:3
-	dev-dotnet/gtk-sharp
-	dev-lang/mono
 	dev-libs/nspr
 	dev-libs/nss
-	x11-libs/pango
-	x11-libs/libX11
-	x11-libs/libXcomposite
-	x11-libs/libXcursor
-	x11-libs/libXdamage
-	x11-libs/libXext
-	x11-libs/libXfixes
-	x11-libs/libXi
-	x11-libs/libXrandr
-	x11-libs/libXrender
+	gnome-base/gconf:2
+	media-libs/alsa-lib
+	net-print/cups
+	sys-apps/dbus
+	sys-libs/glibc[multilib]
+	sys-libs/libcap
+	virtual/glu
+	virtual/opengl
+	x11-libs/gtk+:3[X]
 	x11-libs/libXtst
-	sys-libs/zlib
-	media-libs/libpng
-	dev-db/postgresql
-	sys-apps/lsb-release
 	x11-misc/xdg-utils
-	net-libs/nodejs[npm]
-	sys-apps/fakeroot
-	app-arch/libarchive
-	net-libs/libsoup
-	${DEPEND}
-
 	android? (
-		virtual/ffmpeg
-		app-arch/gzip
 		dev-util/android-sdk-update-manager
-		virtual/jre
-	)
-
-	webgl? (
 		virtual/jdk
+	)
+	webgl? (
+		app-arch/gzip
+		net-libs/nodejs[npm]
+		virtual/ffmpeg
+		virtual/jre
 	)
 "
 
