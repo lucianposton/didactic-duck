@@ -59,7 +59,7 @@ RDEPEND="
 	sys-libs/libcap
 	virtual/glu
 	virtual/opengl
-	x11-libs/gtk+:2[X]
+	x11-libs/gtk+:2
 	x11-libs/libXtst
 	x11-misc/xdg-utils
 	android? (
