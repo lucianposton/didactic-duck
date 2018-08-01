@@ -7,7 +7,7 @@ DESCRIPTION="Dependencies for my dotfiles"
 
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="+de"
+IUSE="+de +mail"
 
 RDEPEND="
 	app-admin/eclean-kernel
@@ -18,22 +18,28 @@ RDEPEND="
 	app-shells/gentoo-zsh-completions
 	app-shells/zsh
 	app-shells/zsh-completions
-	app-text/extract_url
 	app-vim/vim-spell-en
 	dev-lang/ruby
-	mail-client/neomutt
-	mail-mta/protonmail-bridge-bin
+	dev-vcs/git
 	sys-apps/ack
 	sys-apps/netns
 	sys-apps/nse
-	virtual/w3m
+	mail? (
+		app-text/extract_url
+		mail-client/neomutt
+		mail-mta/protonmail-bridge-bin
+		virtual/w3m
+	)
 	de? (
 		app-misc/workrave
 		x11-base/xorg-x11
 		x11-misc/compton
+		x11-misc/dunst
 		x11-misc/redshift
 		x11-misc/trayer-srg
 		x11-misc/urxvt-perls
+		x11-misc/xclip
+		x11-misc/xdg-utils
 		x11-misc/xmobar
 		x11-misc/xscreensaver
 		x11-misc/xwinwrap
