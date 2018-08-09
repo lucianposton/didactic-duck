@@ -18,12 +18,13 @@ RDEPEND="
 	app-shells/gentoo-zsh-completions
 	app-shells/zsh
 	app-shells/zsh-completions
+	app-text/par
 	app-vim/vim-spell-en
 	dev-lang/ruby
 	dev-vcs/git
-	sys-apps/ack
 	sys-apps/netns
 	sys-apps/nse
+	sys-apps/ripgrep
 	mail? (
 		app-text/extract_url
 		mail-client/neomutt
@@ -32,6 +33,7 @@ RDEPEND="
 	)
 	de? (
 		app-misc/workrave
+		www-client/w3m[imlib]
 		x11-base/xorg-x11
 		x11-misc/compton
 		x11-misc/dunst
