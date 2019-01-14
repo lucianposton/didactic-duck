@@ -1,10 +1,10 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
-inherit eutils cmake-utils git-r3
+inherit cmake-utils git-r3
 
 KEYWORDS=""
 if [[ ${PV} != 9999* ]]; then
@@ -71,5 +71,5 @@ src_prepare() {
 		-e "s:llvm_map_components_to_libnames:explicit_map_components_to_libraries:" \
 		evmjit/CMakeLists.txt || die "sed failed"
 
-	epatch_user
+	eapply_user
 }
