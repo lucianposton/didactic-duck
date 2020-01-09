@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 MY_PN=${PN^}
 
@@ -27,7 +26,7 @@ else
 	S="${WORKDIR}/${MY_P}"
 fi
 
-inherit eutils qmake-utils ${SCM}
+inherit desktop eutils cmake-utils ${SCM}
 
 DESCRIPTION="Modern GUI MUD client with Lua scripting support"
 HOMEPAGE="http://www.mudlet.org"
@@ -43,8 +42,10 @@ DEPEND="
 	app-text/hunspell
 	dev-lang/lua
 	dev-libs/libzip
+	dev-libs/pugixml
 	dev-libs/yajl
 	dev-qt/designer:5
+	dev-qt/qtconcurrent:5
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtmultimedia:5
@@ -65,22 +66,15 @@ DEPEND+="
 "
 
 src_prepare() {
-	sed -i \
-		-e 's|-llua5.1|-llua|g' \
-		src/src.pro || die "sed failed"
-
+	cmake-utils_src_prepare
 	epatch "${FILESDIR}/mudlet-lua.patch"
-	epatch_user
-}
-
-src_configure() {
-	eqmake5 "src/src.pro" PREFIX="${EPREFIX}/usr"
+	eapply_user
 }
 
 src_install() {
-	emake INSTALL_ROOT="${ED}" install
-	einstalldocs
-
+	cmake-utils_src_install
+	dobin "${BUILD_DIR}/src/mudlet"
+	dolib.so "${BUILD_DIR}/3rdparty/edbee-lib/edbee-lib/qslog/lib/libQsLog.so"
 	domenu mudlet.desktop
 	doicon mudlet.svg mudlet.png
 }
