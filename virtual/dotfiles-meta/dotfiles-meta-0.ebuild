@@ -26,8 +26,9 @@ RDEPEND="
 	sys-apps/ripgrep
 	mail? (
 		app-text/extract_url
-		mail-client/neomutt
+		mail-client/neomutt[gpgme,pgp-classic,smime-classic]
 		mail-mta/protonmail-bridge-bin
+		net-mail/metamail
 		virtual/w3m
 	)
 	de? (
