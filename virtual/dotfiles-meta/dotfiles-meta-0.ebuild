@@ -11,7 +11,6 @@ IUSE="+de +mail"
 
 RDEPEND="
 	app-admin/eclean-kernel
-	app-crypt/gnupg
 	app-editors/vim
 	app-misc/tmux
 	app-portage/smart-live-rebuild
@@ -48,6 +47,13 @@ RDEPEND="
 		x11-terms/rxvt-unicode
 		x11-wm/xmonad
 		x11-wm/xmonad-contrib
+	)
+	gpg? (
+		app-crypt/gnupg
+		app-admin/pass
+		app-admin/pass-otp
+		app-crypt/pgpdump
+		www-plugins/passff-host
 	)
 "
 	#net-mail/isync
