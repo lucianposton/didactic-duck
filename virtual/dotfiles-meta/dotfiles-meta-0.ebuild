@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -7,7 +7,7 @@ DESCRIPTION="Dependencies for my dotfiles"
 
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="+de +mail"
+IUSE="+de +mail +gpg"
 
 RDEPEND="
 	app-admin/eclean-kernel
