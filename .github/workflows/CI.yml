@@ -1,0 +1,12 @@
+name: 'Continuous Integration'
+on: [push, pull_request]
+jobs:
+    repoman:
+        name: "Repoman"
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Check out code'
+              uses: actions/checkout@v2
+
+            - name: 'Run Repoman'
+              uses: lucianposton/repoman-ebuild-qa-action@v1
