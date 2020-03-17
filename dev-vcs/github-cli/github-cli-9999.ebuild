@@ -253,7 +253,6 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/cli/cli.git"
 	EGIT_CHECKOUT_DIR="${WORKDIR}/cli-${PV}"
-	PROPERTIES="live"
 else
 	go-module_set_globals
 	SRC_URI="https://github.com/cli/cli/archive/v${PV}.tar.gz -> ${P}.tar.gz
