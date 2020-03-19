@@ -34,11 +34,13 @@ RDEPEND="
 	)
 	de? (
 		app-misc/workrave
+		media-gfx/maim
 		www-client/w3m[imlib]
 		x11-base/xorg-x11
 		x11-misc/compton
 		x11-misc/dunst
 		x11-misc/redshift
+		x11-misc/slop
 		x11-misc/trayer-srg
 		x11-misc/urxvt-perls
 		x11-misc/xclip
