@@ -13,6 +13,7 @@ RDEPEND="
 	app-admin/eclean-kernel
 	app-editors/vim
 	app-misc/tmux
+	app-misc/imgurbash2
 	app-portage/smart-live-rebuild
 	app-shells/gentoo-zsh-completions
 	app-shells/zsh
